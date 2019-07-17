@@ -1,26 +1,19 @@
-﻿@model Product
+﻿@model Product[]
 @{
     ViewBag.Title = "Product Name";
 }
 
-<div data-productid="@Model.ProductID" data-stocklevel="@ViewBag.StockLevel">
-    <p>Product Name: @Model.Name</p>
-    <p>Product Price: @($"{Model.Price:C2}")</p>
-    <p>
-        Stock Level:
-        @if (ViewBag.StockLevel == 0)
+<table>
+    <thead>
+        <tr><th>Name</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+        @foreach (Product p in Model)
         {
-            @:Out of Stock
+            <tr>
+                <td>@p.Name</td>
+                <td>@($"{p.Price:C2}")</td>
+            </tr>
         }
-        else if (ViewBag.StockLevel > 0 && ViewBag.StockLevel <= 3)
-        {
-            <b>Low Stock (@ViewBag.StockLevel)</b>
-        }
-        else
-        {
-            @: @ViewBag.StockLevel in Stock
-        }
-    </p>
-
-
-</div>
+    </tbody>
+</table>
